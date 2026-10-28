@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}</style>
+<title>TV Book Reader Privacy</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --bg:#F6F7FA;
+    --surface:#FFFFFF;
+    --surface-inset:#F0F3F8;
+    --text:#1A1D24;
+    --text-dim:#5B6472;
+    --accent:#2E6FCB;
+    --accent-soft:#E8F0FC;
+    --border:#E1E5EC;
+    --good:#1E7B4D;
+    --good-soft:#E5F5EC;
+    --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans:"Public Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#14161C;
+      --surface:#1E212B;
+      --surface-inset:#181A22;
+      --text:#F0F0F0;
+      --text-dim:#A0A6B0;
+      --accent:#5AAAFF;
+      --accent-soft:#1E2A40;
+      --border:#2A3550;
+      --good:#5FCB8F;
+      --good-soft:#1C3327;
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#14161C;
+    --surface:#1E212B;
+    --surface-inset:#181A22;
+    --text:#F0F0F0;
+    --text-dim:#A0A6B0;
+    --accent:#5AAAFF;
+    --accent-soft:#1E2A40;
+    --border:#2A3550;
+    --good:#5FCB8F;
+    --good-soft:#1C3327;
+    color-scheme:dark;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.6;
+  }
+  .wrap{
+    max-width:700px;
+    margin:0 auto;
+    padding:56px 24px 80px;
+  }
+
+  header{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin-bottom:36px;
+  }
+  .mark{
+    flex:0 0 auto;
+    width:52px;
+    height:52px;
+    border-radius:13px;
+    background:linear-gradient(160deg,var(--surface-inset),var(--bg));
+    border:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .mark svg{width:32px;height:32px;display:block;}
+  .titleblock{min-width:0;}
+  .titleblock h1{
+    font-family:var(--serif);
+    font-weight:700;
+    font-size:1.55rem;
+    line-height:1.15;
+    margin:0 0 4px;
+    text-wrap:balance;
+  }
+  .titleblock .meta{
+    font-size:0.85rem;
+    color:var(--text-dim);
+    letter-spacing:.02em;
+    overflow-wrap:anywhere;
+  }
+
+  .lede{
+    font-size:1.05rem;
+    color:var(--text-dim);
+    max-width:60ch;
+    margin:0 0 32px;
+  }
+
+  .glance{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--border);
+    border:1px solid var(--border);
+    border-radius:12px;
+    overflow:hidden;
+    margin-bottom:40px;
+  }
+  .glance-col{
+    background:var(--surface);
+    padding:20px 22px;
+  }
+  .glance-col h2{
+    font-family:var(--sans);
+    font-size:0.7rem;
+    font-weight:700;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    margin:0 0 12px;
+  }
+  .glance-col ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+  }
+  .glance-col li{
+    font-size:0.92rem;
+    display:flex;
+    gap:9px;
+    align-items:baseline;
+  }
+  .glance-col li::before{
+    content:"";
+    flex:0 0 auto;
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--good);
+    margin-top:.45em;
+  }
+  .glance-col.no li::before{ background:var(--text-dim); }
+
+  section{
+    margin-bottom:30px;
+    scroll-margin-top:24px;
+  }
+  section h2{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:1.18rem;
+    margin:0 0 10px;
+    text-wrap:balance;
+  }
+  section p, section li{
+    color:var(--text);
+    max-width:64ch;
+  }
+  section p + p{ margin-top:12px; }
+  section ul, section ol{
+    margin:12px 0 0;
+    padding-left:1.25em;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  section a{ color:var(--accent); }
+  .callout{
+    background:var(--accent-soft);
+    border:1px solid var(--border);
+    border-left:3px solid var(--accent);
+    border-radius:8px;
+    padding:14px 16px;
+    font-size:0.92rem;
+    color:var(--text);
+    margin-top:14px;
+  }
+  .steps{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:18px 20px 20px;
+    margin-top:14px;
+  }
+  .steps h3{
+    font-family:var(--sans);
+    font-size:0.75rem;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    margin:0;
+  }
+  .steps + .steps{ margin-top:12px; }
+  .path{ font-weight:600; }
+
+  hr{
+    border:none;
+    border-top:1px solid var(--border);
+    margin:44px 0 28px;
+  }
+  footer{
+    font-size:0.88rem;
+    color:var(--text-dim);
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 18px;
+    justify-content:space-between;
+  }
+  footer a{ color:var(--accent); text-decoration:none; overflow-wrap:anywhere; }
+  footer a:hover{ text-decoration:underline; }
+  a:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; border-radius:2px; }
+
+  @media (max-width:520px){
+    .glance{ grid-template-columns:1fr; }
+    .wrap{ padding:36px 16px 64px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="mark" aria-hidden="true">
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M50 30 L50 78 Q38 68 20 70 L20 26 Q38 24 50 30Z" fill="var(--surface-inset)" stroke="var(--border)" stroke-width="2"/>
+        <path d="M50 30 L50 78 Q62 68 80 70 L80 26 Q62 24 50 30Z" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
+        <line x1="50" y1="29" x2="50" y2="77" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M65 40 A14 14 0 0 1 65 60" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" fill="none" opacity=".9"/>
+        <path d="M71 34 A22 22 0 0 1 71 66" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" fill="none" opacity=".5"/>
+      </svg>
+    </div>
+    <div class="titleblock">
+      <h1>TV Book Reader — Privacy Policy</h1>
+      <div class="meta">Effective October 28, 2026 &nbsp;·&nbsp; com.suliemanhs.tvbookreaderphone</div>
+    </div>
+  </header>
+
+  <p class="lede">TV Book Reader is an app for Android TV and Android phones that shows your EPUB, PDF, and TXT books and reads them aloud. This page explains, plainly, what the app needs access to and what it does with it.</p>
+
+  <div class="glance">
+    <div class="glance-col yes">
+      <h2>Stays on your device</h2>
+      <ul>
+        <li>Your book files, unless you turn on Sync</li>
+        <li>Your network share address &amp; password, if you add one</li>
+        <li>Bookmarks and reading settings</li>
+        <li>Your reading position, unless you turn on Sync</li>
+      </ul>
+    </div>
+    <div class="glance-col no">
+      <h2>Never happens</h2>
+      <ul>
+        <li>No account is created by the app</li>
+        <li>No analytics or usage tracking</li>
+        <li>No advertising</li>
+        <li>No selling or sharing of your data, and the developer never receives it</li>
+      </ul>
+    </div>
+  </div>
+
+  <section>
+    <h2>Local and USB storage access</h2>
+    <p>To open your books, the app reads only the folders you choose with Android's own folder picker, on your device's storage or a connected USB drive. On older TVs without that picker, it uses a simple built-in folder browser with Android's standard storage permission. The app does not request access to all files on your device.</p>
+    <p>This access is used only to list and open the EPUB, PDF, and TXT files in those folders. Nothing is scanned beyond them, and nothing is sent off the device unless you turn on Sync.</p>
+  </section>
+
+  <section>
+    <h2>Sending books over Wi-Fi (TV)</h2>
+    <p>On a TV, <span class="path">Send over Wi-Fi</span> lets you upload books from a phone or computer on your home network. While that screen is open, the TV shows a local address with a random code, and only devices on the same network that know it can send files. Books arrive directly from your device to the TV and are saved in the app's own storage. They don't pass through the internet or any server, and the TV stops accepting files when you leave the screen.</p>
+  </section>
+
+  <section>
+    <h2>Network (SMB) shares</h2>
+    <p>If you add a network share (a Windows/Samba/NAS folder), the app stores the host, share name, and any username/password you enter directly on the device, so it can reconnect automatically. That connection goes only to the address you provided. TV Book Reader doesn't operate any servers of its own.</p>
+    <div class="callout">These credentials are stored in ordinary app storage, not an encrypted vault. Treat this the way you'd treat any home‑network device: fine for a personal NAS on your own network, not a place to reuse a sensitive password.</div>
+  </section>
+
+  <section>
+    <h2>Reading data</h2>
+    <p>Your bookmarks, reading position, and display preferences (font, text size, page colour) are saved on your device so the app remembers your place. Bookmarks and preferences never leave the device. Your reading position leaves it only if you turn on Sync, described below. All of this is removed if you uninstall the app.</p>
+  </section>
+
+  <section id="sync">
+    <h2>Sync across devices (optional)</h2>
+    <p>Sync is off until you turn it on. When you do, the app asks you to choose a Google account and allow access to a private app folder in that account's Google Drive. The app can see only that folder, never your other Drive files. It stores:</p>
+    <ul>
+      <li>copies of the book files on your device (EPUB, PDF, TXT), except books from network shares and files over 500 MB;</li>
+      <li>your reading position in each book and when you last opened it.</li>
+    </ul>
+    <p>Every TV and phone where you turn on Sync with the same Google account gets the same books and picks up where you left off. The data stays in your own Google Drive and counts toward your Drive storage. The developer never receives it, it isn't shared with anyone else, and it isn't used for advertising or analytics. It travels over encrypted connections (HTTPS). The app doesn't create an account for you and doesn't store your name or email address.</p>
+  </section>
+
+  <section>
+    <h2>Text‑to‑speech narration</h2>
+    <p>Narration is performed by the text‑to‑speech engine already set up on your TV or phone (for example, Google's Speech Services). TV Book Reader hands the text being read to that engine. It does not operate its own speech service, and any processing beyond that is governed by your device's own speech engine and its settings.</p>
+  </section>
+
+  <section>
+    <h2>Purchases</h2>
+    <p>Reading is free. Narration can be unlocked with a one-time purchase, sold and processed entirely through Google Play's billing system. TV Book Reader never sees or stores your payment details, only the resulting purchase status, kept on your device, to know whether narration is unlocked.</p>
+  </section>
+
+  <section>
+    <h2>Data sharing</h2>
+    <p>TV Book Reader does not share, sell, or transmit your files, credentials, or reading activity to any third party. The only outbound network connections it makes are ones you set up or start: a network share you add, Google Play's billing service for purchases, and your own Google Drive if you turn on Sync.</p>
+  </section>
+
+  <section id="delete-data">
+    <h2>Deleting your data</h2>
+    <p>The app has no accounts, so there is nothing for the developer to delete. You control all of your data and can remove it yourself at any time.</p>
+
+    <div class="steps">
+      <h3>Stop syncing</h3>
+      <ol>
+        <li>Open TV Book Reader and select <span class="path">Sync</span> on the bookshelf screen.</li>
+        <li>Choose <span class="path">Turn off sync</span>. Nothing more is uploaded from that device.</li>
+      </ol>
+    </div>
+
+    <div class="steps">
+      <h3>Delete everything Sync stored</h3>
+      <ol>
+        <li>On a computer, open <a href="https://drive.google.com">drive.google.com</a> and sign in with the Google account you used for Sync.</li>
+        <li>Open <span class="path">Settings</span> (gear icon) → <span class="path">Settings</span> → <span class="path">Manage apps</span>.</li>
+        <li>Find <span class="path">TV Book Reader</span>, then choose <span class="path">Options</span> → <span class="path">Delete hidden app data</span> and confirm.</li>
+      </ol>
+    </div>
+
+    <div class="steps">
+      <h3>Remove the app's access to your Google account</h3>
+      <ol>
+        <li>Go to <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.</li>
+        <li>Select <span class="path">TV Book Reader</span> and choose <span class="path">Remove access</span>.</li>
+      </ol>
+    </div>
+
+    <div class="steps">
+      <h3>Delete data on a TV or phone</h3>
+      <ol>
+        <li>Uninstall the app, or go to Android <span class="path">Settings</span> → <span class="path">Apps</span> → <span class="path">TV Book Reader</span> → <span class="path">Storage</span> → <span class="path">Clear storage</span>.</li>
+      </ol>
+    </div>
+
+    <p>Deleted data is removed immediately and isn't kept anywhere else. If you need help, email <strong>suliemanhs1993@gmail.com</strong>.</p>
+  </section>
+
+  <section>
+    <h2>Children's privacy</h2>
+    <p>TV Book Reader is a general‑audience reading tool and is not directed at children. It does not knowingly collect personal information from anyone, including children.</p>
+  </section>
+
+  <section>
+    <h2>Changes to this policy</h2>
+    <p>If this policy changes, the update will be posted here with a new effective date. Continued use of the app after a change constitutes acceptance of the revised policy.</p>
+  </section>
+
+  <hr>
+
+  <footer>
+    <span>TV Book Reader</span>
+    <span style="display:flex;flex-wrap:wrap;gap:6px 18px"><a href="index.html">Home</a><a href="terms.html">Terms of service</a><a href="mailto:suliemanhs1993@gmail.com">suliemanhs1993@gmail.com</a></span>
+  </footer>
+
+</div>
+
+</body>
+</html>

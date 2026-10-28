@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}</style>
+<title>TV Book Reader</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+  /* One reading column, same tokens as the app's privacy policy and terms; a sample "page" with a spoken-word highlight is the one visual moment. */
+  :root{
+    --bg:#F6F7FA;
+    --surface:#FFFFFF;
+    --surface-inset:#F0F3F8;
+    --text:#1A1D24;
+    --text-dim:#5B6472;
+    --accent:#2E6FCB;
+    --accent-soft:#E8F0FC;
+    --border:#E1E5EC;
+    --page:#F4ECDC;
+    --page-ink:#3B3024;
+    --word:#E2CC93;
+    --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans:"Public Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#14161C; --surface:#1E212B; --surface-inset:#181A22; --text:#F0F0F0;
+      --text-dim:#A0A6B0; --accent:#5AAAFF; --accent-soft:#1E2A40; --border:#2A3550;
+      --page:#2A2520; --page-ink:#EADFCB; --word:#6B5A2E;
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#14161C; --surface:#1E212B; --surface-inset:#181A22; --text:#F0F0F0;
+    --text-dim:#A0A6B0; --accent:#5AAAFF; --accent-soft:#1E2A40; --border:#2A3550;
+    --page:#2A2520; --page-ink:#EADFCB; --word:#6B5A2E;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box;}
+  body{ background:var(--bg); color:var(--text); font-family:var(--sans); font-size:16px; line-height:1.6; }
+  .wrap{
+    max-width:760px; margin:0 auto;
+    padding-block:56px 80px;
+    padding-left:max(16px, env(safe-area-inset-left, 0px));
+    padding-right:max(16px, env(safe-area-inset-right, 0px));
+    display:flex; flex-direction:column; gap:44px;
+  }
+  header{ display:flex; align-items:center; gap:16px; }
+  .mark{ flex:0 0 auto; width:56px; height:56px; border-radius:14px; background:linear-gradient(160deg,var(--surface-inset),var(--bg)); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; }
+  .mark svg{ width:34px; height:34px; display:block; }
+  header .name{ font-family:var(--serif); font-weight:700; font-size:1.3rem; margin:0; }
+  header .platforms{ font-size:0.85rem; color:var(--text-dim); letter-spacing:.02em; }
+
+  .hero{ display:flex; flex-direction:column; gap:22px; }
+  .hero h1{ font-family:var(--serif); font-weight:700; font-size:clamp(1.9rem, 5vw, 2.6rem); line-height:1.12; margin:0; text-wrap:balance; max-width:20ch; }
+  .hero p{ margin:0; font-size:1.08rem; color:var(--text-dim); max-width:58ch; }
+  .actions{ display:flex; flex-wrap:wrap; gap:12px; }
+  .btn{ display:inline-flex; align-items:center; gap:8px; padding:11px 18px; border-radius:10px; font-weight:600; font-size:0.95rem; text-decoration:none; }
+  .btn.primary{ background:var(--accent); color:var(--surface); }
+  .btn.secondary{ border:1px solid var(--border); color:var(--text); background:var(--surface); }
+  .btn:focus-visible, a:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+
+  /* The sample page: what the app looks like mid-narration, in the Sepia theme. */
+  .sample{ background:var(--page); color:var(--page-ink); border:1px solid var(--border); border-radius:14px; padding:22px 24px 18px; font-family:var(--serif); font-size:1.15rem; line-height:1.75; }
+  .sample p{ margin:0; text-indent:2em; }
+  .sample mark{ background:var(--word); color:inherit; border-radius:3px; padding:0 2px; }
+  .sample .status{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:4px 16px; margin-top:16px; font-family:var(--sans); font-size:0.8rem; opacity:.75; text-indent:0; font-variant-numeric:tabular-nums; }
+
+  h2{ font-family:var(--serif); font-weight:600; font-size:1.3rem; margin:0 0 14px; text-wrap:balance; }
+  .features{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:18px 28px; margin:0; padding:0; list-style:none; }
+  .features li{ min-width:0; }
+  .features strong{ display:block; font-size:0.98rem; margin-bottom:2px; }
+  .features span{ color:var(--text-dim); font-size:0.93rem; }
+
+  .formats{ display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+  .formats span{ font-size:0.78rem; font-weight:700; letter-spacing:.08em; padding:4px 10px; border-radius:999px; background:var(--accent-soft); color:var(--accent); }
+
+  .note p{ margin:0; max-width:64ch; }
+  .note p + p{ margin-top:12px; }
+  a{ color:var(--accent); }
+
+  hr{ border:none; border-top:1px solid var(--border); margin:0; }
+  footer{ font-size:0.88rem; color:var(--text-dim); display:flex; flex-wrap:wrap; gap:6px 18px; justify-content:space-between; margin-top:-16px; }
+  footer nav{ display:flex; flex-wrap:wrap; gap:6px 18px; }
+  footer a{ text-decoration:none; overflow-wrap:anywhere; }
+  footer a:hover{ text-decoration:underline; }
+
+  @media (max-width:560px){ .features{ grid-template-columns:1fr; } .sample{ font-size:1.05rem; padding:18px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mark" aria-hidden="true">
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M50 30 L50 78 Q38 68 20 70 L20 26 Q38 24 50 30Z" fill="var(--surface-inset)" stroke="var(--border)" stroke-width="2"/>
+        <path d="M50 30 L50 78 Q62 68 80 70 L80 26 Q62 24 50 30Z" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
+        <line x1="50" y1="29" x2="50" y2="77" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M65 40 A14 14 0 0 1 65 60" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" fill="none" opacity=".9"/>
+        <path d="M71 34 A22 22 0 0 1 71 66" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" fill="none" opacity=".5"/>
+      </svg>
+    </div>
+    <div>
+      <p class="name">TV Book Reader</p>
+      <div class="platforms">Android TV · Android phones and tablets</div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Read your books on the big screen, and hear them read aloud.</h1>
+    <p>TV Book Reader opens your own EPUB, PDF, and TXT books on your TV or phone, with large, comfortable text and narration that highlights each word as it's spoken. Navigate everything with a TV remote.</p>
+    <div class="actions">
+      <a class="btn primary" href="https://play.google.com/store/apps/details?id=com.suliemanhs.tvbookreaderphone">Get it on Google Play</a>
+      <a class="btn secondary" href="privacy.html">Privacy policy</a>
+    </div>
+  </section>
+
+  <div class="sample" role="img" aria-label="Example of a book page in the app with the spoken word highlighted">
+    <p>It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of <mark>Darkness</mark>, it was the spring of hope…</p>
+    <div class="status"><span>▶ Playing</span><span>Chapter 2 of 47 · CHAPTER I. The Period</span></div>
+  </div>
+
+  <section>
+    <h2>What it does</h2>
+    <ul class="features">
+      <li><strong>Narration with word highlighting</strong><span>Your device's own voice reads the book while the current word lights up. Pause and it resumes from the exact word.</span></li>
+      <li><strong>Made for the remote</strong><span>Left and Right turn the page, Up and Down scroll a line, Center plays or pauses, and holding Center opens the menu.</span></li>
+      <li><strong>Your library, your files</strong><span>Add books from device storage, a USB drive, or a home network share. On a TV, send books from your phone or computer over Wi-Fi.</span></li>
+      <li><strong>Sync across devices</strong><span>Optional: keep the same books and reading position on every TV and phone signed in to your Google account, through your own Google Drive.</span></li>
+      <li><strong>Comfortable reading</strong><span>Four text sizes, four fonts, and five page colours including Sepia and Black, plus bookmarks, contents, and search.</span></li>
+      <li><strong>Large PDFs too</strong><span>Scanned and image-heavy PDFs open as pages you can zoom and pan, with the PDF's own table of contents.</span></li>
+    </ul>
+    <div class="formats" aria-label="Supported formats"><span>EPUB</span><span>PDF</span><span>TXT</span></div>
+  </section>
+
+  <section class="note">
+    <h2>Free to read</h2>
+    <p>Reading is always free. Narration is free for 7 days, then can be unlocked with a one-time purchase on Google Play. There's no subscription, no ads, and no tracking.</p>
+    <p>The app doesn't sell or include books. It opens the files you already have.</p>
+  </section>
+
+  <hr>
+
+  <footer>
+    <span>TV Book Reader · suliemanhs1993@gmail.com</span>
+    <nav aria-label="Legal">
+      <a href="privacy.html">Privacy policy</a>
+      <a href="terms.html">Terms of service</a>
+      <a href="privacy.html#delete-data">Delete your data</a>
+    </nav>
+  </footer>
+</div>
+
+</body>
+</html>

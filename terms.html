@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}</style>
+<title>TV Book Reader Terms</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+  /* Same reading column and tokens as the TV Book Reader privacy policy, so the app's pages read as one set. */
+  :root{
+    --bg:#F6F7FA;
+    --surface:#FFFFFF;
+    --surface-inset:#F0F3F8;
+    --text:#1A1D24;
+    --text-dim:#5B6472;
+    --accent:#2E6FCB;
+    --accent-soft:#E8F0FC;
+    --border:#E1E5EC;
+    --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans:"Public Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#14161C; --surface:#1E212B; --surface-inset:#181A22; --text:#F0F0F0;
+      --text-dim:#A0A6B0; --accent:#5AAAFF; --accent-soft:#1E2A40; --border:#2A3550;
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#14161C; --surface:#1E212B; --surface-inset:#181A22; --text:#F0F0F0;
+    --text-dim:#A0A6B0; --accent:#5AAAFF; --accent-soft:#1E2A40; --border:#2A3550;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box;}
+  body{ background:var(--bg); color:var(--text); font-family:var(--sans); font-size:16px; line-height:1.6; }
+  .wrap{
+    max-width:700px; margin:0 auto;
+    padding-block:56px 80px;
+    padding-left:max(16px, env(safe-area-inset-left, 0px));
+    padding-right:max(16px, env(safe-area-inset-right, 0px));
+  }
+  header{ display:flex; align-items:center; gap:16px; margin-bottom:36px; }
+  .mark{ flex:0 0 auto; width:52px; height:52px; border-radius:13px; background:linear-gradient(160deg,var(--surface-inset),var(--bg)); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; }
+  .mark svg{ width:32px; height:32px; display:block; }
+  .titleblock{ min-width:0; }
+  .titleblock h1{ font-family:var(--serif); font-weight:700; font-size:1.55rem; line-height:1.15; margin:0 0 4px; text-wrap:balance; }
+  .titleblock .meta{ font-size:0.85rem; color:var(--text-dim); letter-spacing:.02em; overflow-wrap:anywhere; }
+  .lede{ font-size:1.05rem; color:var(--text-dim); max-width:60ch; margin:0 0 36px; }
+  section{ margin-bottom:28px; }
+  section h2{ font-family:var(--serif); font-weight:600; font-size:1.18rem; margin:0 0 10px; text-wrap:balance; }
+  section p, section li{ max-width:64ch; }
+  section p{ margin:0; }
+  section p + p{ margin-top:12px; }
+  section ul{ margin:12px 0 0; padding-left:1.25em; display:flex; flex-direction:column; gap:8px; }
+  a{ color:var(--accent); }
+  a:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; border-radius:2px; }
+  hr{ border:none; border-top:1px solid var(--border); margin:44px 0 28px; }
+  footer{ font-size:0.88rem; color:var(--text-dim); display:flex; flex-wrap:wrap; gap:6px 18px; justify-content:space-between; }
+  footer nav{ display:flex; flex-wrap:wrap; gap:6px 18px; }
+  footer a{ text-decoration:none; overflow-wrap:anywhere; }
+  footer a:hover{ text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mark" aria-hidden="true">
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M50 30 L50 78 Q38 68 20 70 L20 26 Q38 24 50 30Z" fill="var(--surface-inset)" stroke="var(--border)" stroke-width="2"/>
+        <path d="M50 30 L50 78 Q62 68 80 70 L80 26 Q62 24 50 30Z" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
+        <line x1="50" y1="29" x2="50" y2="77" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M65 40 A14 14 0 0 1 65 60" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" fill="none" opacity=".9"/>
+        <path d="M71 34 A22 22 0 0 1 71 66" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" fill="none" opacity=".5"/>
+      </svg>
+    </div>
+    <div class="titleblock">
+      <h1>TV Book Reader — Terms of Service</h1>
+      <div class="meta">Effective October 28, 2026 &nbsp;·&nbsp; com.suliemanhs.tvbookreaderphone</div>
+    </div>
+  </header>
+
+  <p class="lede">These terms cover your use of TV Book Reader on Android TV and Android phones. By installing or using the app, you agree to them. If you don't agree, please uninstall the app.</p>
+
+  <section>
+    <h2>What the app does</h2>
+    <p>TV Book Reader opens EPUB, PDF, and TXT files that you provide, displays them, and can read them aloud with your device's text‑to‑speech engine. It can also, if you choose, sync your books and reading progress between your own devices through your Google Drive.</p>
+  </section>
+
+  <section>
+    <h2>Your books and content</h2>
+    <p>The app doesn't supply any books. You're responsible for the files you open, send to the app, or sync, and for having the right to use them. Don't use TV Book Reader to copy or distribute material you don't have permission to use.</p>
+  </section>
+
+  <section>
+    <h2>Licence to use the app</h2>
+    <p>You may install and use TV Book Reader on devices you own or control, for personal, non‑commercial use. You may not copy, modify, resell, or redistribute the app, or attempt to reverse engineer it except where the law allows.</p>
+  </section>
+
+  <section>
+    <h2>Free trial and purchase</h2>
+    <p>Reading is free. Narration is free for a 7‑day trial, after which it can be unlocked with a one‑time purchase through Google Play. Payments, refunds, and purchase restoration are handled by Google Play under its own terms and refund policy. The purchase is linked to the Google account used to buy it.</p>
+  </section>
+
+  <section>
+    <h2>Sync and Google services</h2>
+    <p>Sync is optional. When you turn it on, your books and reading progress are stored in a private app folder in your own Google Drive, and your use of Google Drive is governed by Google's terms. Synced files count toward your Drive storage. You can turn sync off or delete the synced data at any time, as described in the <a href="privacy.html#delete-data">privacy policy</a>.</p>
+  </section>
+
+  <section>
+    <h2>Privacy</h2>
+    <p>How the app handles your information is explained in the <a href="privacy.html">TV Book Reader Privacy Policy</a>.</p>
+  </section>
+
+  <section>
+    <h2>No warranty</h2>
+    <p>The app is provided "as is" and "as available", without warranties of any kind. It may not open every file correctly, narration quality depends on your device's speech engine, and sync depends on your internet connection and Google's services. Keep your own copies of any books that matter to you.</p>
+  </section>
+
+  <section>
+    <h2>Limitation of liability</h2>
+    <p>To the extent the law allows, the developer isn't liable for any indirect, incidental, or consequential loss, or for loss of data, arising from your use of the app. Where liability can't be excluded, it's limited to the amount you paid for the app. Nothing in these terms limits rights you have under consumer protection laws that can't be waived.</p>
+  </section>
+
+  <section>
+    <h2>Changes and ending use</h2>
+    <p>These terms may be updated. Changes will be posted here with a new effective date, and continuing to use the app afterwards means you accept them. You can stop using the app at any time by uninstalling it.</p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p>Questions about these terms: <strong>suliemanhs1993@gmail.com</strong></p>
+  </section>
+
+  <hr>
+
+  <footer>
+    <span>TV Book Reader</span>
+    <nav aria-label="Other pages">
+      <a href="index.html">Home</a><a href="privacy.html">Privacy policy</a>
+      <a href="mailto:suliemanhs1993@gmail.com">suliemanhs1993@gmail.com</a>
+    </nav>
+  </footer>
+</div>
+
+</body>
+</html>
